@@ -39,9 +39,27 @@ export function Model({
 			}
 		});
 
-		//console.log("actions", actions);
 		actions[animation].timeScale = speed; // Set animation speed to 2x
 		actions[animation].play();
+
+		const timeout = setTimeout(() => {
+			actions[animation].stop();
+
+			animation = "RobotDog@TurnOff";
+			// actions[animation].setLoop(THREE.LoopOnce, 1);
+			actions[animation].timeScale = 2; // Set animation speed to 2x
+			actions[animation].play();
+
+			setTimeout(() => {
+				// actions[animation].stop();
+
+				actions[animation].paused = true;
+			}, 500);
+		}, 3000);
+
+		return () => {
+			clearTimeout(timeout);
+		};
 	}, [actions, materials]);
 	return (
 		<group ref={group} position={position} {...props} dispose={null}>

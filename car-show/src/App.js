@@ -13,6 +13,7 @@ import {
 	OrbitControls,
 	PerspectiveCamera,
 	Clone,
+	SpriteAnimator,
 } from "@react-three/drei";
 import "./style.css";
 import { Boxes } from "./Boxes";
@@ -21,8 +22,9 @@ import { Ground } from "./Ground";
 import { FloatingGrid } from "./FloatingGrid";
 import { Rings } from "./Rings";
 import { Model } from "./Robot";
-
-function CarShow() {
+import { Mech } from "./Mech";
+import { Timer } from "./Timer";
+function CarShow({ setIsTimerRunning }) {
 	return (
 		<>
 			<OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
@@ -57,43 +59,46 @@ function CarShow() {
 				castShadow
 				shadow-bias={-0.0001}
 			/>
+
 			<Ground />
 			<FloatingGrid />
-			<Boxes />
+			{/* <Boxes /> */}
 			<Rings />
 			<Suspense fallback={null}>
-				<Model
+				<Mech setIsTimerRunning={setIsTimerRunning} />
+
+				{/* <Model
 					url="./doggo.glb"
 					position={[0, 0, 0]}
 					color={[1, 0, 0]}
 					speed={3.5}
 					animation="RobotDog@Walk"
-				/>
+				/> */}
 
 				{/* Second cloned model moved to position [2, 0, 0] */}
-				<Model
+				{/* <Model
 					url="./doggo2.glb"
 					position={[0.75, 0, 0]}
 					color={[0, 1, 0]}
-					speed={3}
-					animation="RobotDog@Walk"
-				/>
+					speed={3.5}
+					animation="RobotDog@TurnOff"
+				/> */}
 
 				{/* Third cloned model moved to position [-2, 0, 0] */}
-				<Model
+				{/* <Model
 					url="./doggo3.glb"
 					position={[-0.75, 0, 0]}
 					color={[0, 0, 1]}
 					speed={2}
 					animation="RobotDog@Walk"
-				/>
-				<Model
+				/> */}
+				{/* <Model
 					url="./doggo4.glb"
 					position={[1.5, -0.025, 0]}
 					color={[0.5, 0.5, 1]}
 					speed={1}
 					animation="RobotDog@Dancing"
-				/>
+				/> */}
 			</Suspense>
 
 			<EffectComposer>
@@ -117,10 +122,14 @@ function CarShow() {
 }
 
 function App() {
+	const [isTimerRunning, setIsTimerRunning] = useState(true);
 	return (
 		<Suspense fallback={null}>
+			<div>
+				<Timer isTimerRunning={isTimerRunning} />
+			</div>
 			<Canvas shadows>
-				<CarShow />
+				<CarShow setIsTimerRunning={setIsTimerRunning} />
 			</Canvas>
 		</Suspense>
 	);
