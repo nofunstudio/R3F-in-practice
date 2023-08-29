@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense, useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
 	EffectComposer,
@@ -123,6 +123,25 @@ function CarShow({ setIsTimerRunning }) {
 
 function App() {
 	const [isTimerRunning, setIsTimerRunning] = useState(true);
+	const videoRef = useRef(null);
+	useEffect(() => {
+		console.log("isTimerRunning state:", isTimerRunning); // Log current state
+
+		const videoElement = videoRef.current;
+
+		if (!isTimerRunning && videoElement) {
+			console.log("Timer stopped, trying to play video");
+			videoElement
+				.play()
+				.then(() => {
+					console.log("Video started playing");
+				})
+				.catch((error) => {
+					console.error("Failed to play video", error);
+				});
+		}
+	}, [isTimerRunning]);
+
 	return (
 		<Suspense fallback={null}>
 			<div>
@@ -131,6 +150,25 @@ function App() {
 			<Canvas shadows>
 				<CarShow setIsTimerRunning={setIsTimerRunning} />
 			</Canvas>
+			<video
+				ref={videoRef}
+				autoPlay={false} // Set to false initially
+				muted={true} // Recommended to avoid browser restrictions
+				loop={false} // Loop video
+				style={{
+					position: "absolute",
+					zIndex: 1000,
+					width: "100%",
+					height: "100%",
+					top: 0,
+					left: 0,
+					mixBlendMode: "screen",
+					pointerEvents: "none",
+				}}
+			>
+				<source src="/smoke.mp4" type="video/mp4" />
+				Your browser does not support the video tag.
+			</video>
 		</Suspense>
 	);
 }
