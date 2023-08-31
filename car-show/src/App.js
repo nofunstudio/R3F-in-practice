@@ -1,5 +1,6 @@
 import React, { Suspense, useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
+import gsap from "gsap";
 import {
 	EffectComposer,
 	DepthOfField,
@@ -73,31 +74,31 @@ function CarShow({ setIsTimerRunning }) {
 					color={[1, 0, 0]}
 					speed={3.5}
 					animation="RobotDog@Walk"
-				/> */}
+				/>
 
-				{/* Second cloned model moved to position [2, 0, 0] */}
-				{/* <Model
+				
+				<Model
 					url="./doggo2.glb"
 					position={[0.75, 0, 0]}
 					color={[0, 1, 0]}
-					speed={3.5}
-					animation="RobotDog@TurnOff"
-				/> */}
+					speed={1.5}
+					animation="RobotDog@Walk"
+				/>
 
-				{/* Third cloned model moved to position [-2, 0, 0] */}
-				{/* <Model
+			
+				<Model
 					url="./doggo3.glb"
 					position={[-0.75, 0, 0]}
 					color={[0, 0, 1]}
 					speed={2}
 					animation="RobotDog@Walk"
-				/> */}
-				{/* <Model
+				/>
+				<Model
 					url="./doggo4.glb"
-					position={[1.5, -0.025, 0]}
+					position={[1.5, 0, 0]}
 					color={[0.5, 0.5, 1]}
 					speed={1}
-					animation="RobotDog@Dancing"
+					animation="RobotDog@Walk"
 				/> */}
 			</Suspense>
 
@@ -164,6 +165,7 @@ function App() {
 					left: 0,
 					mixBlendMode: "screen",
 					pointerEvents: "none",
+					objectFit: "fill",
 				}}
 			>
 				<source src="/smoke.mp4" type="video/mp4" />

@@ -11,7 +11,7 @@ export function Mech({ setIsTimerRunning, ...props }) {
 		{ name: "Flip", speed: 1, timeout: 2000 },
 		{ name: "Running", speed: 1, timeout: 5000 },
 		{ name: "Flip", speed: 1, timeout: 2000 },
-		{ name: "Running", speed: 2, timeout: 5000 },
+		{ name: "Running", speed: 1.5, timeout: 2000 },
 		{ name: "Fall", speed: 1, timeout: 500 },
 	];
 

@@ -36,7 +36,7 @@ export function Timer({ isTimerRunning }) {
 		top: "0",
 		left: "0",
 		color: "white",
-		fontSize: "100px",
+		fontSize: "0px",
 		zIndex: 2,
 		padding: "30px",
 		backgroundColor: "rgba(255, 255, 255, 0.0)", // Semi-transparent white
